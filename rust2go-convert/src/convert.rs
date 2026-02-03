@@ -194,7 +194,8 @@ impl<T: ToRef> ToRef for Option<T> {
         let slice = self.as_slice();
         let mut data = ListRef(DataView::new(slice.as_ptr(), slice.len()));
 
-        if matches!(Self::MEM_TYPE, MemType::Complex) {
+        if matches!(Self::MEM_TYPE, MemType::Complex) && !slice.is_empty() {
+            // prevent passing NonNull::dangling() to Go when slice.is_empty()
             data.0.ptr = writer.as_ptr().cast();
             unsafe {
                 let mut children = writer.reserve(slice.len() * std::mem::size_of::<T::Ref>());
