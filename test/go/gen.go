@@ -626,7 +626,7 @@ func cntOptional(s *Optional, cnt *uint) [0]C.OptionalRef {
 func refOptional(p *Optional, buffer *[]byte) C.OptionalRef {
 	return C.OptionalRef{
 		optional: ref_list_mapper(refString)(&p.optional, buffer),
-  }
+	}
 }
 
 type PreserveStructAttrsRequest struct {

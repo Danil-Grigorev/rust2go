@@ -6,6 +6,7 @@ fn main() {
         .with_regen_arg(RegenArgs {
             src: "./src/user.rs".into(),
             dst: "./go/gen.go".into(),
+            // Newer Go versions are faster; keep this off unless you must target Go 1.18.
             go118: true,
             ..Default::default()
         })
