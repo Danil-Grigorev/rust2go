@@ -55,6 +55,11 @@ pub struct PMFriendResponse {
     pub message: String,
 }
 
+#[derive(rust2go::R2G, Clone)]
+pub struct Optional {
+    pub optional: Option<String>,
+}
+
 /// Supported: snake_case、lowerCamelCase、UpperCamelCase、kebab-case、
 /// SHOUTY_SNAKE_CASE、SHOUTY-KEBAB-CASE、Title Case、Train-Case
 #[rust2go::r2g_struct_tag(json = "snake_case", yaml = "lowerCamelCase")]
@@ -89,6 +94,7 @@ pub trait TestCall {
     async fn pm_friend(req: PMFriendRequest) -> PMFriendResponse;
     #[mem_call]
     async fn multi_param_test(user: &User, message: &String, token: &Vec<u8>) -> LoginResponse;
+    fn optional_test(optional: Optional) -> Optional;
 
     async fn preserve_struct_attrs_test(
         data: &PreserveStructAttrsRequest,
